@@ -17,7 +17,8 @@ COPY package*.json ./
 COPY prisma ./prisma/
 
 # Install dependencies (including dev dependencies for build)
-RUN npm ci
+# FIXED: Changed from npm ci to npm install
+RUN npm install --legacy-peer-deps
 
 # Generate Prisma Client BEFORE copying other files
 RUN npx prisma generate
@@ -44,7 +45,8 @@ COPY package*.json ./
 COPY --from=builder /app/prisma ./prisma
 
 # Install production dependencies
-RUN npm ci --omit=dev && npm cache clean --force
+# FIXED: Changed from npm ci to npm install
+RUN npm install --omit=dev --legacy-peer-deps && npm cache clean --force
 
 # Generate Prisma Client in production
 RUN npx prisma generate

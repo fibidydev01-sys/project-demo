@@ -67,7 +67,6 @@ import { SidangModule } from './modules/sidang/sidang.module';
 import { CatatanModule } from './modules/catatan/catatan.module';
 import { TimPerkaraModule } from './modules/tim-perkara/tim-perkara.module';
 import { KonflikModule } from './modules/konflik/konflik.module';
-import { LogsModule } from './modules/system-logs/logs.module';
 import { LogAktivitasModule } from './modules/log-aktivitas/log-aktivitas.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 
@@ -116,7 +115,6 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
     CatatanModule,
     TimPerkaraModule,
     KonflikModule,
-    LogsModule,
     LogAktivitasModule,
     DashboardModule,
   ],

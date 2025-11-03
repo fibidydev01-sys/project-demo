@@ -1,0 +1,14 @@
+# ===== FILE: monitoring/grafana/dashboards/dashboard-provider.yml =====
+apiVersion: 1
+
+providers:
+  - name: 'Firma Dashboards'
+    orgId: 1
+    folder: 'Firma Hukum PERARI'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards
+      foldersFromFilesStructure: false

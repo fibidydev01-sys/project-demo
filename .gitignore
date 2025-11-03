@@ -1,0 +1,266 @@
+# ============================================================================
+# FIRMA HUKUM PERARI - .gitignore (PRODUCTION SAFE)
+# ============================================================================
+
+# ============================================================================
+# 🔴 CRITICAL: SECRETS & CREDENTIALS (NEVER COMMIT!)
+# ============================================================================
+.env
+.env.local
+.env.*.local
+.env.production
+.env.production.local
+.env.development
+.env.development.local
+.env.staging
+.env.test
+
+# Railway/Deployment secrets
+railway.json.local
+.railway/
+
+# Database credentials
+*.sql
+*.dump
+database.url
+*.db-journal
+
+# SSL/TLS certificates & keys
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+
+# JWT secrets backup
+jwt_secrets.txt
+secrets.txt
+credentials.txt
+
+# ============================================================================
+# Node.js
+# ============================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# ============================================================================
+# Build & Distribution
+# ============================================================================
+dist/
+build/
+out/
+.next/
+.nuxt/
+*.tsbuildinfo
+*.log
+
+# ============================================================================
+# IDEs & Editors
+# ============================================================================
+# VSCode
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json.example
+*.code-workspace
+
+# JetBrains (IntelliJ, WebStorm, etc.)
+.idea/
+*.iml
+*.ipr
+*.iws
+.idea_modules/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ============================================================================
+# Operating Systems
+# ============================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ============================================================================
+# Testing & Coverage
+# ============================================================================
+coverage/
+*.lcov
+.nyc_output/
+.grunt/
+lib-cov/
+
+# Jest
+jest_*.json
+
+# ============================================================================
+# Logs & Debug
+# ============================================================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Winston logs
+logs/*.log
+*.log.*
+combined.log
+error.log
+
+# PM2
+.pm2/
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ============================================================================
+# Prisma
+# ============================================================================
+# Keep schema.prisma but ignore generated client in some cases
+# node_modules/.prisma/ is already covered by node_modules/
+
+# Migration backup (optional, comment out if you want to keep)
+prisma/migrations/**/*.sql~
+
+# ============================================================================
+# Uploads & User Data (DO NOT COMMIT USER FILES!)
+# ============================================================================
+uploads/**/*
+!uploads/avatars/.gitkeep
+!uploads/documents/.gitkeep
+!uploads/dokumen/.gitkeep
+!uploads/temp/.gitkeep
+
+# Specific user uploaded files
+uploads/dokumen/*.pdf
+uploads/dokumen/*.doc
+uploads/dokumen/*.docx
+uploads/dokumen/*.xls
+uploads/dokumen/*.xlsx
+uploads/avatars/*.jpg
+uploads/avatars/*.jpeg
+uploads/avatars/*.png
+
+# ============================================================================
+# Backups
+# ============================================================================
+backups/**/*
+!backups/redis/.gitkeep
+*.backup
+*.bak
+*.sql.gz
+*.tar.gz
+*.dump
+
+# Redis backup files
+dump.rdb
+appendonly.aof
+
+# ============================================================================
+# Docker (Local Development Only)
+# ============================================================================
+# Keep Dockerfile and docker-compose.yml for deployment
+# But ignore local docker volumes
+docker-compose.override.yml
+.dockerignore.local
+
+# ============================================================================
+# Monitoring Data (Local)
+# ============================================================================
+# Keep monitoring configs, but ignore data
+prometheus_data/
+grafana_data/
+postgres_data/
+redis_data/
+
+# ============================================================================
+# Temp & Cache
+# ============================================================================
+*.tmp
+*.temp
+.cache/
+.temp/
+tmp/
+temp/
+
+# ============================================================================
+# Source Maps (Optional - uncomment for production)
+# ============================================================================
+# *.map
+# *.js.map
+# dist/**/*.map
+
+# ============================================================================
+# Lock Files (Keep only one)
+# ============================================================================
+# Choose one: keep package-lock.json OR yarn.lock OR pnpm-lock.yaml
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# ============================================================================
+# Collections & Documentation Exports
+# ============================================================================
+collections/*.txt
+collections/*.md
+!collections/README.md
+
+# ============================================================================
+# Command Line
+# ============================================================================
+justfile
+
+# ============================================================================
+# IMPORTANT NOTES:
+# ============================================================================
+# 1. NEVER commit .env files (already in .gitignore above)
+# 2. NEVER commit uploads/ user files (already ignored)
+# 3. NEVER commit database backups (already ignored)
+# 4. NEVER commit logs/ (already ignored)
+# 5. Keep all .gitkeep files to preserve folder structure
+# ============================================================================

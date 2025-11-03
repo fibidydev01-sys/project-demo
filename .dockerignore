@@ -1,0 +1,177 @@
+# ============================================================================
+# FIRMA HUKUM PERARI - .dockerignore (OPTIMAL DOCKER BUILD)
+# ============================================================================
+# Purpose: Exclude files from Docker context to speed up builds & reduce image size
+# ============================================================================
+
+# ============================================================================
+# 🔴 SECRETS & CREDENTIALS (NEVER INCLUDE IN DOCKER IMAGE!)
+# ============================================================================
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.crt
+*.cer
+*.p12
+*.pfx
+secrets/
+credentials/
+
+# ============================================================================
+# Git & Version Control
+# ============================================================================
+.git/
+.gitignore
+.gitattributes
+.github/
+
+# ============================================================================
+# Dependencies (Will be installed in Dockerfile)
+# ============================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ============================================================================
+# Build Artifacts (Will be generated in Dockerfile)
+# ============================================================================
+dist/
+build/
+.next/
+out/
+*.tsbuildinfo
+
+# ============================================================================
+# Development Files
+# ============================================================================
+# IDEs
+.vscode/
+.idea/
+*.code-workspace
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ============================================================================
+# Testing & Coverage
+# ============================================================================
+coverage/
+*.lcov
+.nyc_output/
+test/
+tests/
+**/*.spec.ts
+**/*.test.ts
+jest.config.js
+jest-e2e.json
+
+# ============================================================================
+# Documentation & Examples
+# ============================================================================
+docs/
+documentation/
+examples/
+*.md
+!README.md
+CHANGELOG.md
+CONTRIBUTING.md
+LICENSE
+
+# ============================================================================
+# Docker Files (No need to copy these into image)
+# ============================================================================
+docker-compose*.yml
+Dockerfile*
+.dockerignore
+
+# ============================================================================
+# CI/CD & Deployment
+# ============================================================================
+.github/
+.gitlab-ci.yml
+.travis.yml
+.circleci/
+railway.json.local
+.railway/
+
+# ============================================================================
+# Logs & Debug
+# ============================================================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+lerna-debug.log*
+
+# ============================================================================
+# Monitoring Data (Local Only)
+# ============================================================================
+prometheus_data/
+grafana_data/
+postgres_data/
+redis_data/
+
+# ============================================================================
+# Backups & User Uploads (Don't include in image)
+# ============================================================================
+backups/
+uploads/**/*
+!uploads/**/.gitkeep
+
+# Specific user files
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+# Keep gitkeep files
+!**/.gitkeep
+
+# ============================================================================
+# Scripts & Tools (Dev Only)
+# ============================================================================
+scripts/
+tools/
+*.sh
+!docker-entrypoint.sh
+justfile
+Makefile
+
+# ============================================================================
+# Collections & Exports
+# ============================================================================
+collections/
+*.collection.json
+
+# ============================================================================
+# Temp & Cache
+# ============================================================================
+tmp/
+temp/
+.temp/
+.cache/
+*.tmp
+*.temp
+
+# ============================================================================
+# Lock Files (Keep package-lock.json for reproducible builds)
+# ============================================================================
+# Only ignore alternative lock files if you're using npm
+yarn.lock
+pnpm-lock.yaml
+
+# ============================================================================
+# IMPORTANT NOTES:
+# ============================================================================
+# 1. This file reduces Docker build context size
+# 2. Smaller context = faster builds
+# 3. node_modules/ is ignored because Dockerfile will run npm ci
+# 4. dist/ is ignored because Dockerfile will run npm run build
+# 5. Keep .env.example for documentation
+# ============================================================================

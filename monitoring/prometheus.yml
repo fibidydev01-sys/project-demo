@@ -1,0 +1,77 @@
+# ===== FILE: monitoring/prometheus.yml - COMPLETE WITH ALERT RULES =====
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'firma-hukum-monitor'
+    environment: 'development'
+
+# 🔥 ALERT RULES CONFIGURATION
+rule_files:
+  - 'alert_rules.yml'
+
+# 🔥 OPTIONAL: Uncomment untuk production dengan Alertmanager
+# alerting:
+#   alertmanagers:
+#     - static_configs:
+#         - targets: ['alertmanager:9093']
+
+# ============================================================================
+# SCRAPE CONFIGURATIONS
+# ============================================================================
+scrape_configs:
+  # --------------------------------------------------------------------------
+  # Prometheus Self-Monitoring
+  # --------------------------------------------------------------------------
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          service: 'prometheus'
+
+  # --------------------------------------------------------------------------
+  # Firma Hukum API - Main Application
+  # --------------------------------------------------------------------------
+  - job_name: 'firma-api'
+    scrape_interval: 10s
+    scrape_timeout: 5s
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['api:3000']
+        labels:
+          service: 'firma-api'
+          environment: 'development'
+
+    # 🔥 Optional: Relabeling untuk cleanup
+    metric_relabel_configs:
+      # Drop Go runtime metrics if not needed (optional)
+      - source_labels: [__name__]
+        regex: 'go_.*'
+        action: drop
+
+  # --------------------------------------------------------------------------
+  # 🔥 OPTIONAL: PostgreSQL Exporter (if you want DB metrics from outside)
+  # --------------------------------------------------------------------------
+  # - job_name: 'postgres'
+  #   static_configs:
+  #     - targets: ['postgres-exporter:9187']
+  #       labels:
+  #         service: 'postgres'
+
+  # --------------------------------------------------------------------------
+  # 🔥 OPTIONAL: Redis Exporter (if you want Redis metrics from outside)
+  # --------------------------------------------------------------------------
+  # - job_name: 'redis'
+  #   static_configs:
+  #     - targets: ['redis-exporter:9121']
+  #       labels:
+  #         service: 'redis'
+
+  # --------------------------------------------------------------------------
+  # 🔥 OPTIONAL: Node Exporter (system metrics - CPU, memory, disk)
+  # --------------------------------------------------------------------------
+  # - job_name: 'node'
+  #   static_configs:
+  #     - targets: ['node-exporter:9100']
+  #       labels:
+  #         service: 'node-exporter'

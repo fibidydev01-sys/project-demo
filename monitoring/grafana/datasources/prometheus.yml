@@ -1,0 +1,19 @@
+# ===== FILE: monitoring/grafana/datasources/prometheus.yml =====
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    uid: prometheus
+    url: http://prometheus:9090
+    isDefault: true
+    editable: false
+    version: 1
+    jsonData:
+      timeInterval: '15s'
+      httpMethod: 'POST'
+      queryTimeout: '60s'
+    basicAuth: false
+    withCredentials: false
+    readOnly: false

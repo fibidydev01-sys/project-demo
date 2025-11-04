@@ -17,8 +17,7 @@ COPY package*.json ./
 COPY prisma ./prisma/
 
 # Install dependencies (including dev dependencies for build)
-# FIXED: Changed from npm ci to npm install
-RUN npm install --legacy-peer-deps
+RUN npm ci
 
 # Generate Prisma Client BEFORE copying other files
 RUN npx prisma generate
@@ -45,8 +44,7 @@ COPY package*.json ./
 COPY --from=builder /app/prisma ./prisma
 
 # Install production dependencies
-# FIXED: Changed from npm ci to npm install
-RUN npm install --omit=dev --legacy-peer-deps && npm cache clean --force
+RUN npm ci --omit=dev && npm cache clean --force
 
 # Generate Prisma Client in production
 RUN npx prisma generate
@@ -74,5 +72,5 @@ EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
   CMD wget --quiet --tries=1 --spider http://localhost:3000/health || exit 1
 
-# Start application
-CMD ["node", "dist/src/main.js"]
+# Start application with migrations
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/src/main.js"]
